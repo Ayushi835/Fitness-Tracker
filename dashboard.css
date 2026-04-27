@@ -1156,224 +1156,150 @@ margin-top: 1rem;
 /* ============================================================
    MOBILE RESPONSIVE OVERRIDES (ONLY FOR PHONES)
    ============================================================ */
-
-@media (max-width: 768px) {
-  /* 1. SIDEBAR -> BOTTOM NAVIGATION */
+@media screen and (max-width: 600px) {
+  
+  /* 1. LAYOUT RESTRUCTURING */
   .dashboard-container {
-    grid-template-columns: 1fr; /* Remove the 280px sidebar column */
-    display: flex;
-    flex-direction: column;
+    display: block !important; /* Break the desktop grid */
+    overflow-x: hidden;
   }
 
+  /* Force Sidebar to become Bottom Navigation */
   .sidebar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 70px;
-    flex-direction: row;
-    padding: 0 10px;
-    border-right: none;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    z-index: 1000;
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 75px !important;
+    flex-direction: row !important;
+    padding: 0 !important;
+    background-color: #111827 !important;
+    z-index: 9999 !important; /* Stay above the calendar */
+    border-right: none !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
-  /* Hide text/headers in sidebar to show only icons */
+  /* Hide Desktop-only elements (Text, Logo, Footer) */
   .sidebar-header, 
   .sidebar-footer, 
+  .logout-btn,
   .nav-item span { 
     display: none !important; 
   }
 
   .sidebar-nav {
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
+    display: flex !important;
+    flex-direction: row !important;
+    width: 100% !important;
+    height: 100% !important;
+    justify-content: space-around !important;
+    align-items: center !important;
+    gap: 0 !important;
   }
 
   .nav-item {
-    padding: 12px;
-    justify-content: center;
-    flex: 1;
+    flex: 1 !important;
+    display: flex !important;
+    flex-direction: column !important; /* Stack Icon over Text */
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important; /* Space between icon and name */
+    padding: 5px !important;
+    border-radius: 0 !important;
+    color: #9ca3af !important;
   }
 
   .nav-item svg {
-    width: 1.6rem;
-    height: 1.6rem;
+    width: 1.6rem !important;
+    height: 1.6rem !important;
+  }
+
+  .nav-item span { 
+    display: block !important; 
+    font-size: 10px !important; /* Small, readable text */
+    font-weight: 500 !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
 
   /* 2. HEADER CLEANUP */
   .dashboard-header {
-    padding: 1rem 1.5rem;
-    justify-content: space-between;
+    padding: 1rem !important;
+    flex-direction: row !important; /* Keep it side-by-side */
+    justify-content: space-between !important;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
-  /* Hide search/notification icons in the center */
+  .header-left h1 {
+    font-size: 1.2rem !important;
+  }
+
+  #welcomeText {
+    font-size: 1.1rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* Hide search/notification icons to save space */
   .header-btn {
     display: none !important;
   }
 
-  .header-left h1 {
-    font-size: 1.2rem;
-  }
-
-  #welcomeText {
-    font-size: 1.1rem;
-    margin-bottom: 0;
-  }
-
   .header-right {
-    width: auto;
-    margin-left: auto;
+    gap: 0.5rem !important;
   }
 
-  /* 3. CONTENT SPACING */
-  .dashboard-main {
-    padding-bottom: 80px; /* Space for the bottom nav */
+  /* Ensure the Profile Avatar "A" is visible and centered */
+  .profile-avatar {
+    width: 2.2rem !important;
+    height: 2.2rem !important;
+    font-size: 1rem !important;
+    flex-shrink: 0 !important;
   }
 
+  /* 3. CONTENT & SPACING */
   .dashboard-content {
-    padding: 1rem;
+    padding: 1rem !important;
+    padding-bottom: 100px !important; /* Space for the bottom nav */
   }
 
-  /* 4. STAT CARDS (2x2 GRID) */
+  .main-content,.dashboard-main {
+    margin-left: 0 !important;
+    display: block !important;
+  }
+
   .quick-stats {
-    grid-template-columns: 1fr 1fr; 
-    gap: 12px;
+    grid-template-columns: 1fr !important; /* Stack stats 1-by-1 */
+    gap: 1rem !important;
   }
 
   .stat-card {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  .stat-value {
-    font-size: 1.3rem;
-  }
-
-  /* 5. SWIPEABLE CALENDAR */
- .calendar-grid {
-    display: grid !important;
-    grid-template-columns: repeat(7, 1fr) !important; /* Forces 7 equal columns */
-    gap: 5px !important; /* Tighten the gap to save space */
-    width: 100% !important;
-    padding: 10px 0 !important;
-    overflow: hidden !important; /* Removes the horizontal scroll */
-  }
-
-  /* 2. Make the days scale based on the screen width */
-  .calendar-day {
-    width: 100% !important; /* Takes up the full width of the grid column */
-    aspect-ratio: 1 / 1 !important; /* Keeps it a perfect circle/square */
-    min-width: 0 !important; /* Allows it to shrink to fit */
-    height: auto !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 50% !important;
-    font-size: 0.8rem !important; /* Smaller text to ensure it fits */
-    padding: 5px !important;
-  }
-
-  /* 3. Ensure the container card doesn't have too much padding */
-  .card.journal-card {
-    padding: 1rem 0.5rem !important;
-  }
-
-  /* 3. Hide the ugly scrollbar */
-  .calendar-grid::-webkit-scrollbar {
-    display: none !important;
-  }
-
-  /* 6. FORM & MODAL STACKING */
-  .profile-form .form-row, 
-  .calculator-form .form-row,
-  .goal-form .form-row {
-    grid-template-columns: 1fr !important;
-    gap: 15px;
-  }
-
-  .profile-card {
-    width: 92%;
-    padding: 1.5rem;
-  }
-
-  .profile-form input, 
-  .profile-form select {
-    font-size: 16px !important; /* Prevents mobile browser zoom */
-  }
-
-  .card {
     padding: 1rem !important;
-    margin-bottom: 1rem !important;
   }
 
-  .calendar-header {
-    margin-bottom: 1.5rem;
+  /* 4. CALENDAR & FORM FIXES */
+  .calendar-grid {
+    gap: 5px !important;
   }
 
-  .profile-modal {
-    padding: 15px; /* Adds space so the card doesn't touch the phone edges */
-    align-items: center; /* Keeps it vertically centered */
+  .calendar-day {
+    width: 35px !important;
+    height: 35px !important;
+    font-size: 14px !important;
   }
 
-  /* 2. Make the card wider and more responsive */
+  .calculator-form .form-row {
+    grid-template-columns: 1fr !important;
+  }
+  
+  .goal-form .form-row {
+    grid-template-columns: 1fr !important; /* Stack target inputs */
+  }
+
   .profile-card {
-    width: 100% !important; /* Uses full available width */
-    max-width: 400px; /* But won't get too giant on tablets */
-    padding: 20px !important;
-    border-radius: 1.25rem !important;
-    max-height: 90vh; /* Prevents card from being taller than the phone screen */
-    overflow-y: auto; /* Allows scrolling inside the card if content is long */
+    width: 95% !important;
+    padding: 15px !important;
   }
-
-  /* 3. Fix the spacing of the form elements */
-  .profile-form {
-    gap: 12px !important;
-  }
-
-  .profile-form .form-group label {
-    font-size: 0.75rem; /* Smaller labels save a lot of space */
-    margin-bottom: 4px;
-  }
-
-  .profile-form input, 
-  .profile-form select {
-    padding: 10px !important;
-    font-size: 16px !important; /* Critical to prevent iPhone auto-zoom */
-  }
-
-  /* 4. Center the Avatar and Header */
-  .modal-avatar {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 15px;
-  }
-
-  .profile-header h2 {
-    font-size: 1.25rem;
-  }
-  .navbar {
-    position: sticky; /* Or 'fixed' if you want it to follow you down the page */
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
 }
-
-/* Ensure the dashboard content doesn't get hidden behind a fixed navbar */
-.dashboard-container {
-    padding-top: 20px; 
-}
-}
-
-
-
