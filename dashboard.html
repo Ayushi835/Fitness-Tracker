@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack - Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+  <div id="mainDashboardContent" class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <svg class="sidebar-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>FitTrack</span>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-tab="overview">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>Overview</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="bmi">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+          <span>BMI Calculator</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="workout">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+          </svg>
+          <span>Workouts</span>
+        </a>
+        <a href="#" class="nav-item" data-tab="progress">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="23 6 13.5 15.5 8 10 1 17"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+          <span>Progress</span>
+        </a>
+
+      <div class="sidebar-footer">
+        <a href="index.html" class="logout-btn">Logout</a>
+      </div>
+    </aside>
+
+    <main class="dashboard-main">
+      <header class="dashboard-header">
+        <div class="header-left">
+          <h1 id="pageTitle">Dashboard</h1>
+          <h2 id="welcomeText"></h2>
+
+        </div>
+        <div class="header-right">
+          <button class="header-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </button>
+          <button class="header-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+          </button>
+          <div class="profile-avatar"id="profileAvatar"></div>
+        </div>
+      </header>
+
+      <div class="dashboard-content">
+        <!-- Overview Tab -->
+
+      <section id="overview" class="tab-content active">
+
+  <div class="quick-stats">
+
+
+
+
+    
+    <!-- BMI -->
+    <div class="stat-card">
+      <div class="stat-icon blue-bg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="7" height="7"></rect>
+          <rect x="14" y="3" width="7" height="7"></rect>
+          <rect x="14" y="14" width="7" height="7"></rect>
+          <rect x="3" y="14" width="7" height="7"></rect>
+        </svg>
+      </div>
+
+      <div class="stat-info">
+        <p class="stat-label">BMI</p>
+        <p class="stat-value" id="bmiValue">--</p>
+        <p class="stat-meta" id="bmiStatus">--</p>
+      </div>
+    </div>
+
+
+    <!-- Calories -->
+    <div class="stat-card">
+      <div class="stat-icon orange-bg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 1v22m8-8h-16"></path>
+          <path d="M18 3c-1.657 0-3 1.343-3 3 0 1.405 2 4 3 6 1-2 3-4.595 3-6 0-1.657-1.343-3-3-3z"></path>
+        </svg>
+      </div>
+
+      <div class="stat-info">
+        <p class="stat-label">Calories Burned</p>
+        <p class="stat-value" id="caloriesValue">0</p>
+        <p class="stat-meta">Total</p>
+      </div>
+    </div>
+
+
+    <!-- Workouts -->
+    <div class="stat-card">
+      <div class="stat-icon green-bg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+      </div>
+
+      <div class="stat-info">
+        <p class="stat-label">Workouts</p>
+        <p class="stat-value" id="workoutCount">0</p>
+        <p class="stat-meta">Total workouts</p>
+      </div>
+    </div>
+
+
+    <!-- Progress -->
+    <div class="stat-card">
+      <div class="stat-icon teal-bg">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="23 6 13.5 15.5 8 10 1 17"></polyline>
+          <polyline points="17 6 23 6 23 12"></polyline>
+        </svg>
+      </div>
+
+      <div class="stat-info">
+        <p class="stat-label">Progress</p>
+        <p class="stat-value" id="progressValue">0%</p>
+        <p class="stat-meta">Workout progress</p>
+      </div>
+    </div>
+  </div>
+
+<!--    Activity calendar -->
+
+
+  <div class="card journal-card">
+  <div class="card-header">
+    <h3>Activity Calendar</h3>
+    <span id="selectedDateDisplay">Today</span>
+  </div>
+  
+  <div class="calendar-header">
+  <button id="prevMonth">←</button>
+  <h3 id="calendarTitle"></h3>
+  <button id="nextMonth">→</button>
+</div>
+
+<div class="calendar-grid" id="calendarGrid"></div>
+
+  <div id="dayDetailArea" class="day-details">
+    <div class="empty-state">Select a day to see your activity</div>
+  </div>
+</div>
+</section>
+
+
+        <!-- BMI Calculator Tab -->
+        <section id="bmi" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>BMI Calculator</h2>
+              <p>Calculate your Body Mass Index and track your ideal weight range</p>
+            </div>
+            <form class="calculator-form" id="bmiForm">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Height (cm)</label>
+                  <input type="number" id="height" min="1" placeholder="cm" required   />
+                </div>
+                <div class="form-group">
+                  <label>Weight (kg)</label>
+                  <input type="number" id="weight" min="1" placeholder="Kg" required />
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary btn-lg">Calculate BMI</button>
+            </form>
+
+            <div id="bmiResult" class="result-box" style="display: none;">
+              <div class="result-content">
+                <h3>Your BMI Result</h3>
+                <div class="result-display">
+                  <p class="result-value" id="bmiResultValue"></p>
+                  <p class="result-category" id="bmiCategory">Normal Weight</p>
+                </div>
+                <div class="bmi-scale">
+                  <div class="scale-item">
+                    <span>Underweight</span>
+                    <div class="scale-bar underweight"></div>
+                    <span class="scale-range">&lt; 18.5</span>
+                  </div>
+                  <div class="scale-item">
+                    <span>Normal</span>
+                    <div class="scale-bar normal"></div>
+                    <span class="scale-range">18.5 - 24.9</span>
+                  </div>
+                  <div class="scale-item">
+                    <span>Overweight</span>
+                    <div class="scale-bar overweight"></div>
+                    <span class="scale-range">25 - 29.9</span>
+                  </div>
+                  <div class="scale-item">
+                    <span>Obese</span>
+                    <div class="scale-bar obese"></div>
+                    <span class="scale-range">&gt; 30</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      
+
+        <!-- Workout Tracker Tab -->
+        <section id="workout" class="tab-content">
+          <div class="card">
+            <div class="card-header">
+              <h2>Workout Tracker</h2>
+             
+            </div>
+
+            <form class="calculator-form" id="workoutForm">
+  <div class="form-row">
+    <div class="form-group">
+      <label>Workout Type</label>
+      <select id="workoutType" required>
+        <option value="">Select Type</option>
+        <option value="cardio">Cardio</option>
+        <option value="strength">Strength Training</option>
+        <option value="flexibility">Flexibility</option>
+        <option value="sports">Sports</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="form-row hidden" id="subTypeContainer">
+      <div class="form-group">
+      <label>Workout Sub-Type</label>
+      <select id="workoutSubType" required>
+        <option value="">Select Sub-Type</option>
+      </select>
+    </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group">
+      <label>Duration (minutes)</label>
+      <input type="number" id="workoutDuration" min="1" placeholder="30" required />
+    </div>
+    <div class="form-group">
+      <label>Intensity</label>
+      <select id="intensity" required>
+        <option value="light">Light</option>
+        <option value="moderate">Moderate</option>
+        <option value="high">High</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Weight (kg)</label>
+      <input type="number" id="userWeight" min="1" placeholder="Enter weight" required>
+    </div>
+  </div>
+
+  <div id="extraFields"></div>
+
+  <small class="helper-text">
+Sets = number of rounds • Reps = repetitions per round
+</small>
+  
+  <div class="form-group">
+    <label>Notes</label>
+    <textarea id="workoutNotes" placeholder="Add notes..." rows="3"></textarea>
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-lg">Log Workout</button>
+</form>
+
+            
+
+               <div id="workoutResult" class="workout-result" style="display:none;">
+                 🔥 Calories Burned: <span id="calorieResultValue">0</span> kcal
+                  </div>
+            </form>
+
+            <div class="workouts-history">
+              <h3>Workout History</h3>
+              
+              <div class="workout-list" id="workoutHistory">
+
+                <!-- JS will add workout history here dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Progress Tab -->
+        <section id="progress" class="tab-content">
+  
+  <div class="card status-card">
+    <div class="card-header">
+      <div class="header-main">
+        <h3>Daily Achievement</h3>
+        
+      </div>
+      <div class="progress-percentage" id="goalProgressText">0%</div>
+    </div>
+
+    <div class="progress-visual">
+      <div class="goal-bar">
+        <div id="goalBarFill"></div>
+      </div>
+      <div class="bar-labels">
+      
+        <span>Target: <span id="goalTargetText">0</span> kcal</span>
+      </div>
+    </div>
+
+    <div class="quick-metrics">
+      <div class="metric">
+        <small>Calories Burned Today</small>
+        <strong id="displayActual">0</strong>
+      </div>
+      <div class="metric">
+        <small>Remaining to Goal</small>
+        <strong id="displayRemaining">0</strong>
+      </div>
+    </div>
+  </div>
+</section>
+    
+      </div>
+    </main>
+  </div>
+
+
+<!-- PROFILE -->
+<div id="profileModal" class="profile-modal hidden">
+    <div class="profile-card">
+        <div class="modal-header">
+            <h2>Setup Your Fitness Profile</h2>
+            <span id="closeProfile" class="close-btn">&times;</span>
+        </div>
+      
+                <div class="modal-avatar" id="modalAvatarInitials">A</div>
+         
+        
+
+    <!-- Form -->
+    <form id="profileForm" class="profile-form">
+
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" id="name">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Age</label>
+          <input type="number" id="age">
+        </div>
+
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label>Height (cm)</label>
+          <input type="number" id="profileheight">
+        </div>
+
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" id="profileweight">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Goal</label>
+        <select id="goalType">
+          <option value="lose">Weight Loss</option>
+          <option value="maintain">Maintain</option>
+          <option value="gain">Muscle Gain</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block">
+        Save Profile
+      </button>
+
+    </form>
+
+  </div>
+</div>
+
+
+  <script type="module" src="firebase.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>

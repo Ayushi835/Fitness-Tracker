@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack - Fitness App Landing Page</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body style="opacity: 0; transition: opacity 0.5s";>
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="nav-brand">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+        </svg>
+        <span>FitTrack</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <button class="btn btn-primary">Get Started</button>
+
+      <button class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#features">Features</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <button class="btn btn-primary w-full">Get Started</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Transform Your
+        <span class="gradient-text"> Fitness Journey</span>
+      </h1>
+      <p class="hero-subtitle">
+        Track workouts, monitor progress, and achieve your fitness goals with personalized insights and recommendations.
+      </p>
+      <div class="hero-buttons">
+        <button id="startTrialBtn" class="btn btn-primary btn-lg">Start Free Trial</button>
+        <button id="watchDemoBtn" class="btn btn-secondary btn-lg">Watch Demo</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="features" class="features">
+    <div class="section-container">
+      <div class="section-header">
+        <h2>Everything You Need to Succeed</h2>
+        <p>Comprehensive tools and insights to help you reach your fitness goals faster than ever before.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon blue-gradient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="14" y="14" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+            </svg>
+          </div>
+          <h3>BMI Calculator</h3>
+          <p>Calculate your Body Mass Index instantly and track your ideal weight range with personalized recommendations.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon orange-gradient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 1v22m8-8h-16"></path>
+              <path d="M18 3c-1.657 0-3 1.343-3 3 0 1.405 2 4 3 6 1-2 3-4.595 3-6 0-1.657-1.343-3-3-3z"></path>
+            </svg>
+          </div>
+          <h3>Calorie Burn Tracker</h3>
+          <p>Monitor calories burned during workouts and daily activities with accurate real-time calculations.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon green-gradient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+          </div>
+          <h3>Workout Tracker</h3>
+          <p>Log your exercises, sets, and reps. Track your workout history and see your strength progression over time.</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon teal-gradient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 6 13.5 15.5 8 10 1 17"></polyline>
+              <polyline points="17 6 23 6 23 12"></polyline>
+            </svg>
+          </div>
+          <h3>Progress Analytics</h3>
+          <p>Visualize your fitness journey with detailed charts and statistics. Watch your progress unfold week by week.</p>
+        </div>
+
+
+        
+      <!---  <div class="feature-card">
+          <div class="feature-icon lime-gradient">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+            </svg>
+          </div>
+          <h3>Diet Recommendations</h3>
+          <p>Get personalized meal plans and nutrition advice tailored to your goals, preferences, and dietary needs.</p>
+        </div>
+      </div>
+    </div>-->
+  </section> 
+ 
+
+
+  <footer class="footer">
+    <div class="section-container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+            </svg>
+            <span>FitTrack</span>
+          </div>
+          <p>Your complete fitness companion for a healthier lifestyle.</p>
+        </div>
+       </footer>
+      
+
+  <script type="module" src="script.js"></script>
+  
+  <script type="module" src="auth.js"></script>
+</body>
+</html>

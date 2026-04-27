@@ -1,0 +1,1362 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary-color: #2563eb;
+  --primary-dark: #1e40af;
+  --cyan-color: #06b6d4;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --bg-light: #f9fafb;
+  --bg-lighter: #f3f4f6;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--text-primary);
+  line-height: 1.6;
+  background-color: var(--bg-lighter);
+}
+
+/* Dashboard Container */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #111827;
+  color: white;
+  padding: 1.5rem;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 40;
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.sidebar-logo {
+  width: 2rem;
+  height: 2rem;
+  color: var(--cyan-color);
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  color: #d1d5db;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.nav-item.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.nav-item svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logout-btn {
+  display: block;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  color: #d1d5db;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+/* Main Content */
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.dashboard-header {
+  background-color: white;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.header-left h1 {
+  font-size: 1.875rem;
+  margin-bottom: 0.25rem;
+}
+
+.header-left p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+#welcomeText {
+    font-size: 28px;
+    font-weight: 600;
+    color: #1e293b; /* dark slate */
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+}
+
+#welcomeText span {
+    color: #2563eb; /* blue highlight for name */
+    font-weight: 700;
+}
+
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-btn {
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-btn:hover {
+  color: var(--primary-color);
+}
+
+.header-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.profile-avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-color), var(--cyan-color));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.dashboard-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+}
+
+/* Tabs */
+.tab-content {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Quick Stats */
+.quick-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stat-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: white;
+}
+
+.blue-bg {
+  background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+}
+
+.orange-bg {
+  background: linear-gradient(135deg, #f97316 0%, #ef4444 100%);
+}
+
+.green-bg {
+  background: linear-gradient(135deg, #16a34a 0%, #10b981 100%);
+}
+
+.teal-bg {
+  background: linear-gradient(135deg, #0891b2 0%, #14b8a6 100%);
+}
+
+.stat-info p {
+  margin: 0;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.stat-value {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.stat-meta {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* Cards */
+.card {
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  margin-bottom: 2rem;
+}
+
+.card-header {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-header h2,
+.card-header h3 {
+  margin: 0;
+}
+
+.card-header h2 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.card-header p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.select-sm,
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+}
+
+/* Forms */
+.calculator-form {
+  padding: 1.5rem;
+}
+
+.calculator-form .form-row {
+  
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.calculator-form .form-group {
+  display: flex;            /* <--- This is the missing "Power" switch */
+  flex-direction: column;   /* Now this actually works to stack them */
+  align-items: flex-start;  /* Keeps the label and input pinned to the left */
+  width: 100%;
+
+}
+
+.calculator-form .form-group label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+
+}
+
+.calculator-form .form-group input,
+.calculator-form .form-group select,
+.calculator-form .form-group textarea {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: white;
+}
+
+.calculator-form .form-group input:focus,
+.calculator-form .form-group select:focus,
+.calculator-form .form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+#workoutNotes {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.hidden {
+  display: none !important ;
+} 
+
+.helper-text {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 5px;
+  display: block;
+}
+/* Buttons */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  background-color: var(--bg-light);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-lighter);
+}
+
+.btn-lg {
+  margin-top: 1rem;
+  padding: 0.875rem 1.75rem;
+  font-size: 1rem;
+}
+
+.btn-block {
+  width: 100%;
+  justify-content: center;
+}
+
+/* Results */
+.result-box {
+  padding: 1.5rem;
+  background-color: var(--bg-light);
+  border-top: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+}
+
+.result-content h3 {
+  margin-bottom: 1rem;
+}
+
+.result-display {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.result-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.result-category,
+.result-meta {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.bmi-scale {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.scale-item {
+  text-align: center;
+}
+
+.scale-item span {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+}
+
+.scale-bar {
+  height: 2rem;
+  border-radius: 0.25rem;
+  margin: 0.5rem 0;
+}
+
+.scale-bar.underweight {
+  background: linear-gradient(135deg, #6366f1, #a855f7);
+}
+
+.scale-bar.normal {
+  background: linear-gradient(135deg, #16a34a, #10b981);
+}
+
+.scale-bar.overweight {
+  background: linear-gradient(135deg, #f59e0b, #f97316);
+}
+
+.scale-bar.obese {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+}
+
+.scale-range {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+
+/* Workout List */
+.workout-list {
+  padding: 1.5rem;
+}
+
+.workout-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background-color: var(--bg-light);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.workout-item:hover {
+  background-color: var(--bg-lighter);
+}
+
+.workout-item:last-child {
+  margin-bottom: 0;
+}
+
+.workout-icon {
+  font-size: 1.75rem;
+  min-width: 2rem;
+  text-align: center;
+}
+
+.workout-details {
+  flex: 1;
+}
+
+.workout-name {
+  font-weight: 600;
+  margin: 0;
+}
+
+.workout-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0.25rem 0 0 0;
+}
+
+.workout-cal {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.workout-stats {
+  text-align: right;
+}
+
+.workout-date {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.workouts-history {
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.workouts-history h3 {
+  margin-bottom: 1rem;
+}
+
+/* Workout Result Box */
+.workout-result {
+margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.6rem;
+  background-color: #f8fafc; /* light neutral */
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+
+.workout-result span {
+ display: block;
+  margin-top: 4px;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #2563eb; /* subtle primary highlight */
+
+}
+
+#extraFields {
+  margin-top: 10px;
+}
+
+ .dynamic-field {
+  margin-top: 10px;
+}
+
+.dynamic-field input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+ .dynamic-field label {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 5px;
+  display: block;
+}
+
+/* Smooth animation */
+.dynamic-field {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hidden {
+  display: none;
+}
+
+/* Progress */
+/* --- UNIFIED PROGRESS SECTION --- */
+#progress {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Card Foundation */
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  border: 1px solid #f1f5f9;
+}
+
+/* --- OUTPUT: STATUS CARD --- */
+.status-card {
+  border-top: 4px solid #4f46e5; /* Indigo accent */
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-main h3 {
+  margin: 0;
+  color: #1e293b;
+  font-size: 1.25rem;
+}
+
+.subtitle {
+  color: #64748b;
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+
+.progress-percentage {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #4f46e5;
+  letter-spacing: -1px;
+}
+
+/* Progress Bar */
+.goal-bar {
+  width: 100%;
+  height: 14px;
+  background-color: #f1f5f9;
+  border-radius: 100px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+#goalBarFill {
+  height: 100%;
+  width: 0%; /* JS will update this */
+  background: linear-gradient(90deg, #4f46e5, #818cf8);
+  transition: width 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+/* Metric Badges */
+.quick-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 24px;
+  border-top: 1px solid #f1f5f9;
+  padding-top: 20px;
+}
+
+.metric small {
+  display: block;
+  color: #64748b;
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.metric strong {
+  font-size: 1.25rem;
+  color: #1e293b;
+}
+
+/* --- INPUT: SETTINGS CARD --- */
+.goal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.goal-form .form-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.goal-form .form-group {
+  min-width: 0; /* Prevents overflow */
+}
+
+.goal-form .form-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.goal-form input, 
+.goal-form select {
+  width: 100%;
+  box-sizing: border-box; /* Includes padding in width */
+  padding: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.goal-form input:focus {
+  border-color: #4f46e5;
+  background-color: #ffffff;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.goal-badge {
+  background: #eef2ff;
+  color: #4f46e5;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+
+
+
+/* Overview Grid */
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .dashboard-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .header-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  .quick-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .overview-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .diet-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.day-details {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8fafc;
+    border-radius: 12px;
+}
+
+.workout-log-entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid #4f46e5;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.entry-type {
+    display: block;
+    font-weight: 700;
+    color: #1e293b;
+    text-transform: capitalize;
+}
+
+.entry-meta {
+    font-size: 0.8rem;
+    color: #64748b;
+}
+
+.entry-notes {
+    font-size: 0.75rem;
+    font-style: italic;
+    color: #94a3b8;
+    margin-top: 5px;
+}
+
+.entry-stats {
+    text-align: right;
+}
+
+.entry-calories {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #4f46e5;
+    display: block;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 30px;
+    color: #94a3b8;
+}
+
+
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.calendar-header button {
+  background: #f0f2f5;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.2s ease;
+}
+
+.calendar-header button:hover {
+  background: #dbeafe;
+}
+
+#calendarTitle {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.calendar-day {
+   width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin: auto; /* center inside grid */
+
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+
+  transition: all 0.2s ease;
+}
+
+.calendar-day:hover {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+}
+
+
+
+/* 🔵 BLUE TRANSLUCENT CIRCLE */
+.calendar-day.active-day {
+  background: rgba(59, 130, 246, 0.25);
+  color: #2563eb;
+  font-weight: 600;
+}
+
+
+/* Hover */
+.calendar-day:hover {
+  background: rgba(59, 130, 246, 0.15);
+}
+
+/* MODAL BACKGROUND */
+.profile-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+/* CARD */
+.profile-card {
+  background: white;
+  width: 400px;
+  max-width: 90%;
+  border-radius: 16px;
+  padding: 25px;
+  box-shadow: var(--shadow-lg);
+  animation: fadeIn 0.3s ease;
+  position: relative;
+}
+
+/* HEADER */
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-header h2 {
+  font-size: 20px;
+}
+
+.profile-header span {
+  cursor: pointer;
+  font-size: 22px;
+}
+
+/* AVATAR */
+.modal-avatar {
+  width: 70px;
+  height: 70px;
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  margin: 10px auto;
+}
+
+.profile-username {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* FORM */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* FIXED FORM GROUP */
+.profile-form .form-group {
+  min-width: 0;   /* VERY IMPORTANT */
+  width: 100%;
+}
+
+
+.profile-form label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #475569;
+  margin-bottom: 6px;
+}
+
+.profile-form input,
+.profile-form select {
+    width: 100%;
+  box-sizing: border-box; /* Includes padding in width */
+  padding: 12px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: #f8fafc;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+
+/* ROW (SIDE BY SIDE FIELDS) */
+.profile-form .form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.close-btn {
+   position: absolute !important;
+    top: 15px !important;    /* Distance from the top of the white card */
+    right: 15px !important;  /* Distance from the right of the white card */
+    cursor: pointer !important;
+    font-size: 24px !important;
+    color: #9ca3af !important;
+    z-index: 100 !important;
+    line-height: 1 !important;
+}
+
+.close-btn:hover {
+    color: #ef4444 !important; /* Turns red on hover */
+}
+
+/* HIDE */
+.hidden {
+  display: none !important;
+}
+/* 5. ONBOARDING STYLES */
+.onboarding-msg {
+  background: #fee2e2;
+  color: #b91c1c;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Dashboard Blur class */
+.onboarding-active {
+  filter: blur(8px);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* THE TOGGLE */
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ============================================================
+   MOBILE RESPONSIVE OVERRIDES (ONLY FOR PHONES)
+   ============================================================ */
+
+@media (max-width: 768px) {
+  /* 1. SIDEBAR -> BOTTOM NAVIGATION */
+  .dashboard-container {
+    grid-template-columns: 1fr; /* Remove the 280px sidebar column */
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    flex-direction: row;
+    padding: 0 10px;
+    border-right: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+  }
+
+  /* Hide text/headers in sidebar to show only icons */
+  .sidebar-header, 
+  .sidebar-footer, 
+  .nav-item span { 
+    display: none !important; 
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .nav-item {
+    padding: 12px;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .nav-item svg {
+    width: 1.6rem;
+    height: 1.6rem;
+  }
+
+  /* 2. HEADER CLEANUP */
+  .dashboard-header {
+    padding: 1rem 1.5rem;
+    justify-content: space-between;
+  }
+
+  /* Hide search/notification icons in the center */
+  .header-btn {
+    display: none !important;
+  }
+
+  .header-left h1 {
+    font-size: 1.2rem;
+  }
+
+  #welcomeText {
+    font-size: 1.1rem;
+    margin-bottom: 0;
+  }
+
+  .header-right {
+    width: auto;
+    margin-left: auto;
+  }
+
+  /* 3. CONTENT SPACING */
+  .dashboard-main {
+    padding-bottom: 80px; /* Space for the bottom nav */
+  }
+
+  .dashboard-content {
+    padding: 1rem;
+  }
+
+  /* 4. STAT CARDS (2x2 GRID) */
+  .quick-stats {
+    grid-template-columns: 1fr 1fr; 
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stat-value {
+    font-size: 1.3rem;
+  }
+
+  /* 5. SWIPEABLE CALENDAR */
+ .calendar-grid {
+    display: grid !important;
+    grid-template-columns: repeat(7, 1fr) !important; /* Forces 7 equal columns */
+    gap: 5px !important; /* Tighten the gap to save space */
+    width: 100% !important;
+    padding: 10px 0 !important;
+    overflow: hidden !important; /* Removes the horizontal scroll */
+  }
+
+  /* 2. Make the days scale based on the screen width */
+  .calendar-day {
+    width: 100% !important; /* Takes up the full width of the grid column */
+    aspect-ratio: 1 / 1 !important; /* Keeps it a perfect circle/square */
+    min-width: 0 !important; /* Allows it to shrink to fit */
+    height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 50% !important;
+    font-size: 0.8rem !important; /* Smaller text to ensure it fits */
+    padding: 5px !important;
+  }
+
+  /* 3. Ensure the container card doesn't have too much padding */
+  .card.journal-card {
+    padding: 1rem 0.5rem !important;
+  }
+
+  /* 3. Hide the ugly scrollbar */
+  .calendar-grid::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  /* 6. FORM & MODAL STACKING */
+  .profile-form .form-row, 
+  .calculator-form .form-row,
+  .goal-form .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 15px;
+  }
+
+  .profile-card {
+    width: 92%;
+    padding: 1.5rem;
+  }
+
+  .profile-form input, 
+  .profile-form select {
+    font-size: 16px !important; /* Prevents mobile browser zoom */
+  }
+
+  .card {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .calendar-header {
+    margin-bottom: 1.5rem;
+  }
+
+  .profile-modal {
+    padding: 15px; /* Adds space so the card doesn't touch the phone edges */
+    align-items: center; /* Keeps it vertically centered */
+  }
+
+  /* 2. Make the card wider and more responsive */
+  .profile-card {
+    width: 100% !important; /* Uses full available width */
+    max-width: 400px; /* But won't get too giant on tablets */
+    padding: 20px !important;
+    border-radius: 1.25rem !important;
+    max-height: 90vh; /* Prevents card from being taller than the phone screen */
+    overflow-y: auto; /* Allows scrolling inside the card if content is long */
+  }
+
+  /* 3. Fix the spacing of the form elements */
+  .profile-form {
+    gap: 12px !important;
+  }
+
+  .profile-form .form-group label {
+    font-size: 0.75rem; /* Smaller labels save a lot of space */
+    margin-bottom: 4px;
+  }
+
+  .profile-form input, 
+  .profile-form select {
+    padding: 10px !important;
+    font-size: 16px !important; /* Critical to prevent iPhone auto-zoom */
+  }
+
+  /* 4. Center the Avatar and Header */
+  .modal-avatar {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 15px;
+  }
+
+  .profile-header h2 {
+    font-size: 1.25rem;
+  }
+}
+
+
+
