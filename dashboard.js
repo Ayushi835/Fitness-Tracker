@@ -131,8 +131,8 @@ function getMultiplier(level) {
 
 
 function getGoalCalories(tdee, goalType) {
-  if (goalType === "weight_loss") return tdee - 500;
-  if (goalType === "muscle_gain") return tdee + 300;
+  if (goalType === "weight_loss") return tdee + 500;
+  if (goalType === "muscle_gain") return tdee + 200;
   return tdee;
 }
 
